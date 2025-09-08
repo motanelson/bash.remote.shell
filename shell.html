@@ -1,0 +1,20 @@
+<html>
+<head>
+    <title>My CGI Server</title>
+    <script>
+        function sendCmd(event) {
+            event.preventDefault();
+            let cmd = document.getElementById("lshell").value;
+            cmd = cmd.replace(/\s+/g, "_"); // troca espaços por "_"
+            window.location.href = "/cgi-bin/shell?" + cmd;
+        }
+    </script>
+</head>
+<body bgcolor="#FFFF00" style="color: black;">
+    <form onsubmit="sendCmd(event)">
+        <label for="lshell">Shell to run:</label>
+        <input type="text" id="lshell" name=""><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
