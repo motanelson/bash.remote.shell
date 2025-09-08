@@ -19,8 +19,9 @@ void *replacec(char *c){
 }
 
 int main(){
-	char envi[1080];
+	char envi[4096];
 	char *c;
+        FILE *f;
 	strcpy(envi,"QUERY_STRING");
 	printf("Content-type:plain-text\r\n\r\n");
 	c=getenv(envi);
@@ -28,6 +29,13 @@ int main(){
 	replacec(envi);
 	strcat(envi," > siteMap.txt");
 	system(envi);
-	printf("%s\r\n",envi);
-	return 0;
+        f=fopen("siteMap.txt","r");
+                while(1){
+		    fgets(envi,4095,f);
+                    printf("%s\n",envi);
+                    if(feof(f))break;
+                }
+	fclose(f);
+        
+        return 0;
 }
